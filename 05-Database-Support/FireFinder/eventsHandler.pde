@@ -15,6 +15,13 @@ public class Fire {
   public int Temp;
   public float Humidity;
   public float Wind;
+  color suncol = color(255, 0, 0, 63);
+  color moncol = color(0, 197, 255, 63);
+  color tuecol = color(94, 12, 232, 63);
+  color wedcol = color(232, 147, 12, 63);
+  color thucol = color(215, 255, 13, 63);
+  color fircol = color(0, 0, 255, 63);
+  color satcol = color(0, 0, 0, 63);
 
   Fire(int i, float x, float y, String m, String d, int t, float h, float w) {
     id = i;
@@ -27,21 +34,7 @@ public class Fire {
     Wind = w;
   }
   void display() {
-    if (Day == "sun") {
-      fill(255, 0, 0, 63);
-    } else if (Day == "mon") {
-      fill(0, 197, 255, 63);
-    } else if (Day == "tue") {
-      fill(94, 12, 232, 63);
-    } else if (Day == "wed") {
-      fill(232, 147, 12, 63);
-    } else if (Day == "fri") {
-      fill(215, 255, 13, 63);
-    } else if (Day == "sat") {
-      fill(0, 0, 255, 63);
-    } else {
-      fill(0, 0, 0, 63);
-    }
+    fill(0, 0, 0, 63);
     rect(X*75, Y*75, 10, 10);
   }
 }
@@ -69,6 +62,7 @@ void mouseReleased() {
   if (queryReady == true) {
     submitQuery();
     queryReady = false;
+    clearCanvas();
   }
 }
 
@@ -90,6 +84,9 @@ void submitQuery() {
 
   // This is where SQL will store your results
   ResultSet rs = null;
+  for (int i=0; i<Fires.size (); i++) {
+    Fires.remove(i);
+  }
 
   try {
     // submit the sql query and get a ResultSet from the database
@@ -108,7 +105,7 @@ void submitQuery() {
       String day = rs.getString("Day");
       float x = rs.getFloat("X");
       float y = rs.getFloat("Y");
-      System.out.println(id + "\t" + temp + "\t" + wind + "\t" + humidity + "\t" + month + "\t" + day + "\t" + x + "\t" + y);
+      //System.out.println(id + "\t" + temp + "\t" + wind + "\t" + humidity + "\t" + month + "\t" + day + "\t" + x + "\t" + y);
 
       // TODO do something with results (e.g. store them in arrays and render in draw
       Fires.add(new Fire(rs.getInt("id"), rs.getFloat("X"), rs.getFloat("Y"), rs.getString("Month"), rs.getString("Day"), rs.getInt("Temp"), rs.getFloat("Humidity"), rs.getFloat("Wind")));
@@ -117,7 +114,7 @@ void submitQuery() {
   catch (Exception e) {
     // should be a java.lang.NullPointerException here when rs is empty
     e.printStackTrace();
-  } 
+  }
   finally {
     closeThisResultSet(rs);
   }
