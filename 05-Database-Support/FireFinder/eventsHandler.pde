@@ -61,7 +61,9 @@ void mouseReleased() {
   if (queryReady == true) {
     submitQuery();
     queryReady = false;
-    clearCanvas();
+    for (int i=0; i<Fires.size(); i++){
+      Fires.remove(i);
+    }
   }
 }
 

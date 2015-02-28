@@ -5,9 +5,6 @@ void draw() {
   for (int i = 0; i < Fires.size (); i++) {
     Fire fi = Fires.get(i);
     fi.display();
-//    if (mousePressed == true) {
-//      clearCanvas();
-//    }
   }
   /**
    ** Finish this:
