@@ -15,13 +15,8 @@ public class Fire {
   public int Temp;
   public float Humidity;
   public float Wind;
-  color suncol = color(255, 0, 0, 63);
-  color moncol = color(0, 197, 255, 63);
-  color tuecol = color(94, 12, 232, 63);
-  color wedcol = color(232, 147, 12, 63);
-  color thucol = color(215, 255, 13, 63);
-  color fircol = color(0, 0, 255, 63);
-  color satcol = color(0, 0, 0, 63);
+  color drycol = color(255, 0, 0, 63);
+  color wetcol = color(0, 0, 255, 63);
 
   Fire(int i, float x, float y, String m, String d, int t, float h, float w) {
     id = i;
@@ -34,7 +29,11 @@ public class Fire {
     Wind = w;
   }
   void display() {
-    fill(0, 0, 0, 63);
+    if (Humidity > 50.0) {
+      fill(wetcol);
+    } else if (Humidity <= 50.0) {
+      fill(drycol);
+    }
     rect(X*75, Y*75, Temp, Temp);
   }
 }
