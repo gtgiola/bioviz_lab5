@@ -35,7 +35,7 @@ public class Fire {
   }
   void display() {
     fill(0, 0, 0, 63);
-    rect(X*75, Y*75, 10, 10);
+    rect(X*75, Y*75, Temp, Temp);
   }
 }
 public ArrayList<Fire> Fires = new ArrayList<Fire>();
